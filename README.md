@@ -10,12 +10,12 @@ let start = function() {
     data: [
       {
         color: '#336699', // 색상
-        html: '<div>blahblah</div>', // 보여줄 텍스트를 HTML로
+        html: '<div class="txt1">blahblah</div>', // 보여줄 텍스트를 HTML로
         percent: 30, // 합이 100 이 되도록
       },
       {
         color: '#4477aa',
-        html: '<p>blahblah</p>',
+        html: '<p class="txt2">blahblah</p>',
         percent: 20,
       },
       {

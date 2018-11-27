@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+    <title>Circle Chart</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #donutTest {
+            position: absolute;
+            top: 50px;
+            left: 50px;
+        }
+
+        #donutTest .__donut {
+            /* 그림자 및 보더 추가 */
+            border: 1px solid rgba(0, 0, 0, 0.3);
+            box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.15);
+        }
+
+        #donutTest .__inner_circle {
+            /* 보더 추가 */
+            border: 1px solid rgba(0, 0, 0, 0.3);
+        }
+
+        #donutTest .__item {
+            -webkit-transition: all 0.2s linear;
+            transition: all 0.2s linear;
+        }
+
+        #donutTest .txt1 {
+            font-size: 11px;
+            font-family: sans-serif;
+            line-height: 18px;
+            color: #fff;
+            -webkit-transition: all 0.2s linear;
+            transition: all 0.2s linear;
+        }
+
+        #donutTest .txt2 {
+            font-size: 12px;
+            font-family: sans-serif;
+            line-height: 18px;
+            color: #ff0;
+            -webkit-transition: all 0.2s linear;
+            transition: all 0.2s linear;
+        }
+
+        #donutTest .on .__item {
+            /* 마우스 오버시에 영역 확대 */
+            width: 110% !important;
+            height: 110% !important;
+        }
+
+        #donutTest .on .txt1 {
+            /* 마우스 오버시에 폰트사이즈 확대 */
+            font-size: 18px !important;
+        }
+        #donutTest .on .txt2 {
+            /* 마우스 오버시에 폰트사이즈 확대 */
+            font-size: 24px !important;
+        }
+    </style>
+</head>
+<body>
+<div id="donutTest"></div>
+<script src="circle_chart.js"></script>
+</body>
+</html>
