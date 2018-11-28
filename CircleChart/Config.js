@@ -36,7 +36,7 @@ export default {
       position: 'absolute',
       top: 0,
       left: 0,
-      zIndex: 4,
+      zIndex: 7,
     },
     USEMAP_ID: 'imageMap',
     SRC:
@@ -128,7 +128,7 @@ export default {
       left: 0,
       width: 0,
       height: 0,
-      zIndex: 3,
+      zIndex: 6,
     },
     CLASSNAME: '__contents_point',
   },
