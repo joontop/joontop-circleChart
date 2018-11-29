@@ -51,14 +51,21 @@ export default class CircleChart {
   getDonut() {
     let fragment = document.createDocumentFragment();
     let element = document.createElement('div');
+    let transparentInner = this.getInner();
+
     element.setAttribute('class', CONFIG.DONUT.CLASSNAME);
     Object.assign(element.style, CONFIG.DONUT.CSS, {
       backgroundColor: this.state.outer.color,
       height: this.state.outer.diameter + 'px',
       width: this.state.outer.diameter + 'px',
     });
+    Object.assign(transparentInner.style, {
+      backgroundColor: 'transparent',
+      zIndex: 8,
+    });
     element.appendChild(this.getDivider());
     element.appendChild(this.getInner());
+    element.appendChild(transparentInner);
     if (this.state.isContents) {
       element.appendChild(this.getImg());
       element.appendChild(this.getMap());
