@@ -2,16 +2,100 @@ import CONFIG from './Config';
 import Options from './Options';
 
 export default class CircleChart {
-  constructor(options) {
-    Options.setDatas(options || {});
+  constructor(options = {}) {
+    Options.setDatas(options);
     this.state = {};
   }
 
   start() {
     this.setState();
+    this.setEvent();
     const donut = this.getDonut();
     this.state.target.innerHTML = '';
     this.state.target.appendChild(donut);
+  }
+
+  setState() {
+    this.state = {
+      data: Options.getData(),
+      inner: {
+        color: Options.getInnerColor(),
+        diameter: Options.getInnerDiameter(),
+        radius: Options.getInnerDiameter() / 2,
+      },
+      isContents: Options.getIsContents(),
+      isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      ),
+      isTouch: false,
+      outer: {
+        color: Options.getOuterColor(),
+        diameter: Options.getOuterDiameter(),
+        radius: Options.getOuterDiameter() / 2,
+      },
+      target: Options.getTarget(),
+      areas: [],
+      dividers: [],
+    };
+    this.state.centerRadius =
+      this.state.inner.radius +
+      (this.state.outer.radius - this.state.inner.radius) / 2;
+  }
+
+  setEvent() {
+    if (this.state.isMobile) {
+      this.state.target.addEventListener('touchstart', this.onStart.bind(this));
+      document.addEventListener('touchmove', this.onMove.bind(this));
+      document.addEventListener('touchend', this.onEnd.bind(this));
+    } else {
+      this.state.target.addEventListener('mouseover', this.onStart.bind(this));
+      this.state.target.addEventListener('mouseout', this.onEnd.bind(this));
+    }
+  }
+
+  addOnClass(e) {
+    const x = this.state.isMobile ? e.changedTouches[0].clientX : e.clientX;
+    const y = this.state.isMobile ? e.changedTouches[0].clientY : e.clientY;
+    const target = document.elementFromPoint(x, y);
+    if (
+      target &&
+      target.nodeName &&
+      target.nodeName.toLowerCase() === 'area' &&
+      target.getAttribute('area-number')
+    ) {
+      const number = target.getAttribute('area-number');
+      for (let i = 0; i < this.state.dividers.length; i++) {
+        if (this.state.dividers[i].getAttribute('divider-number') === number) {
+          if (this.state.dividers[i].className.indexOf('on') === -1) {
+            this.state.dividers[i].classList.add('on');
+          }
+        } else {
+          if (this.state.dividers[i].className.indexOf('on') !== -1) {
+            this.state.dividers[i].classList.remove('on');
+          }
+        }
+      }
+    }
+  }
+
+  onStart(e) {
+    this.state.isTouch = true;
+    this.addOnClass(e);
+  }
+
+  onMove(e) {
+    if (this.state.isTouch) {
+      this.addOnClass(e);
+    }
+  }
+
+  onEnd() {
+    this.state.isTouch = false;
+    for (let i = 0; i < this.state.dividers.length; i++) {
+      if (this.state.dividers[i].className.indexOf('on') !== -1) {
+        this.state.dividers[i].classList.remove('on');
+      }
+    }
   }
 
   getSin(a, b) {
@@ -132,9 +216,9 @@ export default class CircleChart {
     element.setAttribute('class', CONFIG.ITEM.CLASSNAME);
     Object.assign(element.style, CONFIG.ITEM.CSS, {
       webkitTransform:
-        'rotate(' + startDegree + 'deg) translateX(-50%) translateY(-50%)',
+      'rotate(' + startDegree + 'deg) translateX(-50%) translateY(-50%)',
       transform:
-        'rotate(' + startDegree + 'deg) translateX(-50%) translateY(-50%)',
+      'rotate(' + startDegree + 'deg) translateX(-50%) translateY(-50%)',
     });
     const donutRight = this.getRight();
     const donutLeft = this.getLeft();
@@ -166,7 +250,6 @@ export default class CircleChart {
     let element = document.createElement('map');
     element.setAttribute('name', CONFIG.IMG.USEMAP_ID);
     element.setAttribute('id', CONFIG.IMG.USEMAP_ID);
-
     let startDegree = 0;
     let areasFragment = document.createDocumentFragment();
     for (let i = 0; i < this.state.data.length; i++) {
@@ -175,72 +258,8 @@ export default class CircleChart {
       areasFragment.appendChild(area);
       startDegree = startDegree + degree;
     }
-
-    if (this.state.isMobile) {
-      element.addEventListener('touchstart', this.onStart.bind(this));
-      document.addEventListener('touchmove', this.onMove.bind(this));
-      document.addEventListener('touchend', this.onEnd.bind(this));
-    } else {
-      element.addEventListener('mouseover', this.onStart.bind(this));
-      element.addEventListener('mouseout', this.onEnd.bind(this));
-    }
     element.appendChild(areasFragment);
     return element;
-  }
-
-  onStart(e) {
-    this.state.isTouch = true;
-    e.preventDefault();
-    const x = this.state.isMobile ? e.changedTouches[0].clientX : e.pageX;
-    const y = this.state.isMobile ? e.changedTouches[0].clientY : e.pageY;
-    const target = document.elementFromPoint(x, y);
-    if (!target.getAttribute('area-number')) {
-      return;
-    }
-    const number = target.getAttribute('area-number');
-    for (let i = 0; i < this.state.dividers.length; i++) {
-      if (this.state.dividers[i].getAttribute('divider-number') === number) {
-        if (this.state.dividers[i].className.indexOf('on') === -1) {
-          this.state.dividers[i].classList.add('on');
-        }
-      } else {
-        if (this.state.dividers[i].className.indexOf('on') !== -1) {
-          this.state.dividers[i].classList.remove('on');
-        }
-      }
-    }
-  }
-
-  onMove(e) {
-    if (this.state.isTouch) {
-      const x = this.state.isMobile ? e.changedTouches[0].clientX : e.pageX;
-      const y = this.state.isMobile ? e.changedTouches[0].clientY : e.pageY;
-      const target = document.elementFromPoint(x, y);
-      if (!target.getAttribute('area-number')) {
-        return;
-      }
-      const number = target.getAttribute('area-number');
-      for (let i = 0; i < this.state.dividers.length; i++) {
-        if (this.state.dividers[i].getAttribute('divider-number') === number) {
-          if (this.state.dividers[i].className.indexOf('on') === -1) {
-            this.state.dividers[i].classList.add('on');
-          }
-        } else {
-          if (this.state.dividers[i].className.indexOf('on') !== -1) {
-            this.state.dividers[i].classList.remove('on');
-          }
-        }
-      }
-    }
-  }
-
-  onEnd() {
-    this.state.isTouch = false;
-    for (let i = 0; i < this.state.dividers.length; i++) {
-      if (this.state.dividers[i].className.indexOf('on') !== -1) {
-        this.state.dividers[i].classList.remove('on');
-      }
-    }
   }
 
   getRight() {
@@ -279,33 +298,6 @@ export default class CircleChart {
       transform: 'rotate(' + leftBoxDegree + 'deg)',
     });
     return element;
-  }
-
-  setState() {
-    this.state = {
-      data: Options.getData(),
-      inner: {
-        color: Options.getInnerColor(),
-        diameter: Options.getInnerDiameter(),
-        radius: Options.getInnerDiameter() / 2,
-      },
-      isContents: Options.getIsContents(),
-      isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        navigator.userAgent
-      ),
-      isTouch: false,
-      outer: {
-        color: Options.getOuterColor(),
-        diameter: Options.getOuterDiameter(),
-        radius: Options.getOuterDiameter() / 2,
-      },
-      target: Options.getTarget(),
-      areas: [],
-      dividers: [],
-    };
-    this.state.centerRadius =
-      this.state.inner.radius +
-      (this.state.outer.radius - this.state.inner.radius) / 2;
   }
 
   // todo : createElement
