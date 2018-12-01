@@ -43,6 +43,5 @@ start();
 https://joontop.github.io/joontop-circleChart/sample/
 
 ## License
-
-Copyright (c) 2018 Joontop &lt;zoontop@naver.com&gt;
+Free
 
