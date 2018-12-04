@@ -283,8 +283,8 @@ export default class CircleChart {
     element.setAttribute('class', CONFIG.RIGHT_BOX.CLASSNAME);
     Object.assign(element.style, CONFIG.RIGHT_BOX.CSS, {
       backgroundColor: data.color,
-      webkitTransform: 'rotate(' + rightBoxDegree + 'deg)',
-      transform: 'rotate(' + rightBoxDegree + 'deg)',
+      webkitTransform: 'rotate(' + rightBoxDegree + 'deg) translateZ(0)',
+      transform: 'rotate(' + rightBoxDegree + 'deg) translateZ(0)',
     });
     return element;
   }
@@ -295,8 +295,8 @@ export default class CircleChart {
     element.setAttribute('class', CONFIG.LEFT_BOX.CLASSNAME);
     Object.assign(element.style, CONFIG.LEFT_BOX.CSS, {
       backgroundColor: data.color,
-      webkitTransform: 'rotate(' + leftBoxDegree + 'deg)',
-      transform: 'rotate(' + leftBoxDegree + 'deg)',
+      webkitTransform: 'rotate(' + leftBoxDegree + 'deg) translateZ(0)',
+      transform: 'rotate(' + leftBoxDegree + 'deg) translateZ(0)',
     });
     return element;
   }
