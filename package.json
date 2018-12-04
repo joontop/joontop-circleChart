@@ -1,6 +1,6 @@
 {
   "name": "joontop-circlechart",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "CircleChart",
   "main": "index.js",
   "author": "joontop",
@@ -13,11 +13,13 @@
     "build": "webpack",
     "dev": "webpack-dev-server --open --progress"
   },
+  "email": "zoontop@naver.com",
   "keywords": [
     "chart",
     "circle chart",
     "donut chart",
-    "html chart"
+    "html chart",
+    "pie chart"
   ],
   "devDependencies": {
     "babel-core": "^6.26.3",

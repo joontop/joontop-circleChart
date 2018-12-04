@@ -224,7 +224,8 @@ export default class CircleChart {
     const donutLeft = this.getLeft();
     donutRight.appendChild(this.getRightBox(this.state.data[number], degree));
     donutLeft.appendChild(this.getLeftBox(this.state.data[number], degree));
-    element.appendChild(donutRight, donutLeft);
+    element.appendChild(donutRight);
+    element.appendChild(donutLeft);
     return element;
   }
 
