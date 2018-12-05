@@ -1,6 +1,6 @@
 {
   "name": "joontop-circlechart",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "CircleChart",
   "main": "lib/index.js",
   "author": "joontop",
@@ -11,6 +11,7 @@
   },
   "scripts": {
     "build": "webpack --mode production",
+    "start": "webpack --mode production --watch",
     "dev": "webpack-dev-server --open --progress"
   },
   "email": "zoontop@naver.com",

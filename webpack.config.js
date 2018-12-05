@@ -8,6 +8,8 @@ module.exports = {
     path: path.resolve(__dirname, 'lib'),
     publicPath: '/lib/',
     filename: 'index.js',
+    library: 'circleChart',
+    libraryTarget: 'umd',
   },
   module: {
     rules: [
