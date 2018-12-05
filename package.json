@@ -1,8 +1,8 @@
 {
   "name": "joontop-circlechart",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "CircleChart",
-  "main": "./build/circle_chart.js",
+  "main": "index.js",
   "author": "joontop",
   "license": "ISC",
   "repository": {
@@ -24,7 +24,6 @@
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
-    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "webpack": "^4.16.5",
     "webpack-cli": "^3.1.0",

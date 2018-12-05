@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const version = require('./package.json').version;
 
 module.exports = {
-  entry: ['babel-polyfill', './index.js'],
+  entry: './index.js',
   output: {
     path: path.resolve(__dirname, 'build'),
     publicPath: '/build/',
