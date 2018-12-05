@@ -10,6 +10,7 @@ class Options {
       isContents: false,
       isDesc: false,
       target: null,
+      id: null,
     };
   }
   setDatas(datas) {
@@ -28,6 +29,8 @@ class Options {
     if (this.options.contentsMinWidth <= 100) {
       this.options.contentsMinWidth = 100;
     }
+    let id = Math.random().toString(36).substring(7);
+    this.options.id = '__mapid_' + id;
   }
   getContentsMinWidth() {
     return this.options.contentsMinWidth;
@@ -52,6 +55,9 @@ class Options {
   }
   getTarget() {
     return this.options.target;
+  }
+  getId() {
+    return this.options.id;
   }
 }
 export default new Options();

@@ -170,7 +170,7 @@ export default class CircleChart {
 
   getImg() {
     let element = document.createElement('img');
-    element.setAttribute('usemap', '#' + CONFIG.IMG.USEMAP_ID);
+    element.setAttribute('usemap', '#' + Options.getId());
     element.setAttribute('src', CONFIG.IMG.SRC);
     Object.assign(element.style, CONFIG.IMG.CSS, {
       width: this.state.outer.diameter + 'px',
@@ -249,8 +249,8 @@ export default class CircleChart {
 
   getMap() {
     let element = document.createElement('map');
-    element.setAttribute('name', CONFIG.IMG.USEMAP_ID);
-    element.setAttribute('id', CONFIG.IMG.USEMAP_ID);
+    element.setAttribute('name', Options.getId());
+    element.setAttribute('id', Options.getId());
     let startDegree = 0;
     let areasFragment = document.createDocumentFragment();
     for (let i = 0; i < this.state.data.length; i++) {
