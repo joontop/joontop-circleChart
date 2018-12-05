@@ -3,11 +3,11 @@ const webpack = require('webpack');
 const version = require('./package.json').version;
 
 module.exports = {
-  entry: './index.js',
+  entry: './src/index.js',
   output: {
-    path: path.resolve(__dirname, 'build'),
-    publicPath: '/build/',
-    filename: 'circle_chart.js',
+    path: path.resolve(__dirname, 'lib'),
+    publicPath: '/lib/',
+    filename: 'index.js',
   },
   module: {
     rules: [
@@ -17,9 +17,6 @@ module.exports = {
         exclude: /(node_modules)|(build)/,
         use: {
           loader: 'babel-loader',
-          options: {
-            presets: ['env'],
-          },
         },
       },
     ],
