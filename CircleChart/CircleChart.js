@@ -80,11 +80,17 @@ export default class CircleChart {
 
   onStart(e) {
     this.state.isTouch = true;
+    if (this.state.isMobile) {
+      e.preventDefault();
+    }
     this.addOnClass(e);
   }
 
   onMove(e) {
     if (this.state.isTouch) {
+      if (this.state.isMobile) {
+        e.preventDefault();
+      }
       this.addOnClass(e);
     }
   }
@@ -221,11 +227,13 @@ export default class CircleChart {
       'rotate(' + startDegree + 'deg) translateX(-50%) translateY(-50%)',
     });
     const donutRight = this.getRight();
-    const donutLeft = this.getLeft();
     donutRight.appendChild(this.getRightBox(this.state.data[number], degree));
-    donutLeft.appendChild(this.getLeftBox(this.state.data[number], degree));
     element.appendChild(donutRight);
-    element.appendChild(donutLeft);
+    if (degree > 180) {
+      const donutLeft = this.getLeft();
+      donutLeft.appendChild(this.getLeftBox(this.state.data[number], degree));
+      element.appendChild(donutLeft);
+    }
     return element;
   }
 
