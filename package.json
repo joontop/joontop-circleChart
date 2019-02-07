@@ -1,6 +1,6 @@
 {
   "name": "joontop-circlechart",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "CircleChart",
   "main": "lib/index.js",
   "author": "joontop",

@@ -29,6 +29,7 @@ let start = function() {
     outerColor: '#99ccff', // 도넛의 기본 색상
     innerColor: '#ffffff', // 안쪽원의 색상
     isContents: true, // 텍스트의 유무
+    isEvent: false, // 이벤트 리스너 유무 (없으면 true)
     isDesc: true, // 가장 큰 percent 부터 시계방향 표시
     contentsMinWidth: 150, // 표시되는 텍스트영역의 최소값
     target: document.querySelector('#donutTest'), // chart 가 들어갈 영역지정

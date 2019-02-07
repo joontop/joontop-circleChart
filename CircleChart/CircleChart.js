@@ -9,7 +9,9 @@ export default class CircleChart {
 
   start() {
     this.setState();
-    this.setEvent();
+    if (this.state.isEvent) {
+      this.setEvent();
+    }
     const donut = this.getDonut();
     this.state.target.innerHTML = '';
     this.state.target.appendChild(donut);
@@ -24,6 +26,7 @@ export default class CircleChart {
         radius: Options.getInnerDiameter() / 2,
       },
       isContents: Options.getIsContents(),
+      isEvent: Options.getIsEvent(),
       isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
         navigator.userAgent
       ),
@@ -222,9 +225,9 @@ export default class CircleChart {
     element.setAttribute('class', CONFIG.ITEM.CLASSNAME);
     Object.assign(element.style, CONFIG.ITEM.CSS, {
       webkitTransform:
-      'rotate(' + startDegree + 'deg) translateX(-50%) translateY(-50%)',
+      'rotate(' + startDegree + 'deg) translateX(-50%) translateY(-50%) translateZ(0)',
       transform:
-      'rotate(' + startDegree + 'deg) translateX(-50%) translateY(-50%)',
+      'rotate(' + startDegree + 'deg) translateX(-50%) translateY(-50%) translateZ(0)',
     });
     const donutRight = this.getRight();
     donutRight.appendChild(this.getRightBox(this.state.data[number], degree));

@@ -9,6 +9,7 @@ class Options {
       innerColor: '#ffffff',
       isContents: false,
       isDesc: false,
+      isEvent: true,
       target: null,
       id: null,
     };
@@ -58,6 +59,9 @@ class Options {
   }
   getId() {
     return this.options.id;
+  }
+  getIsEvent() {
+    return this.options.isEvent;
   }
 }
 export default new Options();

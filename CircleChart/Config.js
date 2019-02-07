@@ -76,7 +76,7 @@ export default {
       overflow: 'hidden',
       position: 'absolute',
       top: 0,
-      right: 0,
+      left: '50%',
       width: '50%',
       height: '100%',
     },
